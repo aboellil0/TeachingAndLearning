@@ -1,0 +1,12 @@
+﻿@using G6MVCDemo.DAL;
+@model Course
+
+<h2 class="text-start text-danger">Delete Course</h2>
+<p>Are you sure you want to delete this course?</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Delete" class="btn btn-danger" />
+    @Html.ActionLink("Back to List", "Index")
+}

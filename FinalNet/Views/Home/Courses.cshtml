@@ -1,0 +1,39 @@
+﻿
+
+@model List<CoursesDetails>
+
+<h1 class="fw-bold text-primary">Courses</h1>
+
+<table class="table table-striped mt-5">
+    <thead>
+        <tr class="fw-bold fs-6">
+            <th>Name</th>
+            <th>Discription</th>
+            <th>Duration</th>
+            <th>Capacity</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="">
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Duration</td>
+                <td>@item.Capacity</td>
+                <td>@item.StartDate</td>
+                <td>@item.EndDate</td>
+                <td><a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+@if (ViewBag.UserRole == nameof(UserType.Instructor))
+{
+    <a asp-controller="Home" asp-action="Create" class="btn btn-success">Create New one</a>
+}
+

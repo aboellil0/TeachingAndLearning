@@ -1,0 +1,75 @@
+﻿@model ViewModelMA
+
+
+
+@if (ViewBag.isEnrolled)
+{
+    <h1>ABOELLIL</h1>
+}
+
+<h1 class="w-100 m-auto text-center fw-bold text-primary">Course Details</h1>
+
+<h5><span class="fw-bold">Name :  </span>@Model.CoursesDetailsMA.Name</h5>
+<h5><span class="fw-bold">Description :  </span>@Model.CoursesDetailsMA.Description</h5>
+<h5><span class="fw-bold">NameDuration :  </span>@Model.CoursesDetailsMA.Duration</h5>
+<h5><span class="fw-bold">Capacity :  </span>@Model.CoursesDetailsMA.Capacity</h5>
+<h5><span class="fw-bold">StartDate :  </span>@Model.CoursesDetailsMA.StartDate</h5>
+<h5><span class="fw-bold">EndDate :  </span>@Model.CoursesDetailsMA.EndDate</h5>
+
+
+
+@if (ViewBag.UserRole == nameof(UserType.Instructor))
+{
+    <h1 class="fw-bold text-primary mt-5">Students</h1>
+
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr class="fw-bold fs-6">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>phone number</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.StudentclassMA)
+            {
+                <tr class="">
+                    <td>@item.FName</td>
+                    <td>@item.LName</td>
+                    <td>@item.Email</td>
+                    <td>@item.Ph</td>
+                    <td class="d-flex justify-content-end">
+                        <a href="@Url.Action("UnEnroll", "Home", new { studentId = item.Id, courseId = ViewBag.Id })" class="btn btn-danger">UnEnroll</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+
+
+<div class="d-flex flex-row">
+    @if (ViewBag.UserRole == nameof(UserType.Instructor))
+    {
+        <a asp-action="Edit" asp-route-id="@Model.CoursesDetailsMA.Id" class="btn btn-primary mt-4 me-4">Edit</a>
+        <a asp-action="Delete" asp-route-id="@Model.CoursesDetailsMA.Id" class="btn btn-danger mt-4 me-4">Delete</a>
+        //<a asp-controller="Home" asp-action="Courses" class="btn btn-secondary mt-4 me-4">Back</a>
+    }
+    else if (!ViewBag.isEnrolled && ViewBag.UserRole == nameof(UserType.Student))
+    {
+        <form method="post" asp-action="Enroll" asp-route-id="@Model.CoursesDetailsMA.Id" class="mt-4 me-4">
+            <button type="submit" class="btn btn-success">Enroll</button>
+        </form>
+        //<a asp-controller="Home" asp-action="Courses" class="btn btn-secondary mt-4 me-4">Back</a>
+    }
+    @*else if (ViewBag.UserRole == nameof(UserType.Student))
+    {
+        <a asp-controller="Home" asp-action="EnrollmentCourses" class="btn btn-secondary mt-4 me-4">Back</a>
+    }*@
+
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary mt-4 me-4">Back</a>
+</div>

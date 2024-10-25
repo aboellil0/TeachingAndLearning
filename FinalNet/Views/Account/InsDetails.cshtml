@@ -1,0 +1,44 @@
+﻿@model ViewModelMA
+
+
+
+<h1 class="w-100 m-auto text-center fw-bold text-primary">Instructor Details</h1>
+
+<h5><span class="fw-bold">First Name :  </span>@Model.InstuctorclassMA.FName</h5>
+<h5><span class="fw-bold">Last Name :  </span>@Model.InstuctorclassMA.LName</h5>
+<h5><span class="fw-bold">Email :  </span>@Model.InstuctorclassMA.Email</h5>
+<h5><span class="fw-bold">Phone :  </span>@Model.InstuctorclassMA.Ph</h5>
+
+
+
+
+<h1 class="fw-bold text-primary mt-4">Courses</h1>
+
+<table class="table table-striped mt-5">
+    <thead>
+        <tr class="fw-bold fs-6">
+            <th>Name</th>
+            <th>Discription</th>
+            <th>Duration</th>
+            <th>Capacity</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListCourseDetailsMA)
+        {
+            <tr class="">
+                <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Duration</td>
+                <td>@item.Capacity</td>
+                <td>@item.StartDate</td>
+                <td>@item.EndDate</td>
+                <td><a asp-controller="Home" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>

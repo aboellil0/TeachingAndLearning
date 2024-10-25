@@ -1,0 +1,12 @@
+﻿@using G6MVCDemo.DAL;
+@model CourseEnrollment
+
+<h2>Unenroll Student</h2>
+<p>Are you sure you want to unenroll this student from the course?</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <input type="submit" value="Unenroll" class="btn btn-danger" />
+    @Html.ActionLink("Cancel", "Index")
+}
